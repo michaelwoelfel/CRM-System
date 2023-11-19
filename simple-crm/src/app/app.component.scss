@@ -1,0 +1,64 @@
+
+
+.example-container{
+    display: flex;
+   width: 100%;
+   max-width: 100%;
+   height: 100vh;
+}
+
+.example-spacer {
+    width: 100px;
+    display: flex;
+    height: 100px;
+}
+
+.toolbar-flex {
+   display: flex;
+   width: 100vw;
+   max-width: 100%;
+}
+
+.crm-span {
+   margin-left: 20px;
+}
+
+.example-sidenav {
+   width: 300px;
+   height: 100vh;
+}
+
+.logo-container {
+   display: flex;
+   justify-content: center;
+   height: 200px;
+   width: 100%;
+   border-bottom: 2px solid black;
+   box-shadow: 10px 5px 5px black;
+}
+
+.list-container {
+   height: 70%;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+}
+
+.mat-list-item {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+   border-bottom: 2px solid black;
+   box-shadow: 10px 5px 5px black;
+}
+
+.img-crm {
+   width: 250px;
+   height: 100%;
+   object-fit: contain;
+}
+
+.img-list {
+   height: 30px;
+ 
+}

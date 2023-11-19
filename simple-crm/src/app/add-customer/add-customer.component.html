@@ -1,0 +1,34 @@
+
+<div class="dialog-container">
+<h1 mat-dialog-title>Add Customer </h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <textarea [(ngModel)]="customer.name" matInput placeholder="Name">Name</textarea>
+  </mat-form-field>
+  <mat-form-field >
+    <mat-label>Company</mat-label>
+    <textarea [(ngModel)]="customer.company" matInput placeholder="Company">Company</textarea>
+  </mat-form-field>
+ 
+
+
+</div>
+
+
+<p>
+  <mat-form-field class="example-full-width">
+    <mat-label>Address</mat-label>
+    <textarea  [(ngModel)]="customer.address" matInput placeholder="Ex. 100 Main St">1600 Amphitheatre Pkwy</textarea>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Zip code</mat-label>
+    <textarea [(ngModel)]="customer.zipcode" matInput></textarea>
+  </mat-form-field>
+</p>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" >Cancel</button>
+  <button (click)="saveCustomer()" mat-button>Save</button>
+</div>
+</div>
