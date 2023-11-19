@@ -10,13 +10,10 @@
     <mat-label>Company</mat-label>
     <textarea [(ngModel)]="customer.company" matInput placeholder="Company">Company</textarea>
   </mat-form-field>
- 
 
 
-</div>
 
 
-<p>
   <mat-form-field class="example-full-width">
     <mat-label>Address</mat-label>
     <textarea  [(ngModel)]="customer.address" matInput placeholder="Ex. 100 Main St">1600 Amphitheatre Pkwy</textarea>
@@ -25,8 +22,8 @@
     <mat-label>Zip code</mat-label>
     <textarea [(ngModel)]="customer.zipcode" matInput></textarea>
   </mat-form-field>
-</p>
 
+</div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" >Cancel</button>
   <button (click)="saveCustomer()" mat-button>Save</button>
