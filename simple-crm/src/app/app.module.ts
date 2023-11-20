@@ -27,6 +27,8 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import { MatPaginatorModule} from '@angular/material/paginator';
+
 
 
 
@@ -69,6 +71,9 @@ import {MatNativeDateModule} from '@angular/material/core';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatPaginatorModule,
+
+
 
 
 

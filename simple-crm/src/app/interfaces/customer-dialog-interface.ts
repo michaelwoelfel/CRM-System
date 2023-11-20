@@ -1,4 +1,7 @@
+import { Timestamp } from '@angular/fire/firestore';
+
 export interface CustomerData {
+
     firstname: string ;
     lastname: string ;
     company: string;
@@ -6,5 +9,5 @@ export interface CustomerData {
     zipcode: string;
     email: string;
     tel: string;
-    birthdate: Date | null;
+    birthdate: Date | Timestamp | null | string;
   }
