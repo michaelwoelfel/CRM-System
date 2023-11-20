@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogTitle,
-  MatDialogContent,
-  MatDialogActions,
-  MatDialogClose,
-} from '@angular/material/dialog';
-import { CustomerData } from '../interfaces/customer-dialog-interface';
+import { MatDialog,} from '@angular/material/dialog';
+import { FirebaseService } from '../firebase.service'; 
+
+
 
 
 @Component({
@@ -18,25 +12,24 @@ import { CustomerData } from '../interfaces/customer-dialog-interface';
   styleUrls:[ './customers.component.scss']
 })
 export class CustomersComponent {
-  customer: CustomerData = {
-    name: "",
-    company: "",
-    address: "",
-    zipcode: "",
-  };
+  dataSource;
 
-  constructor(public dialog: MatDialog, ) {}
 
+  constructor(public dialog: MatDialog, public firebaseService: FirebaseService ) {
+    this.dataSource = this.firebaseService.customers;
+    console.log(this.dataSource);
+  }
+
+  displayedColumns: string[] = ['Firstname', 'Lastname','Company','Address','Zipcode','Email','tel','birthdate',];
+ ngOnInit() {
+  
+ }
+ 
   openDialog(): void {
    this.dialog.open(AddCustomerComponent, {
     });
-
- 
-
-    
-    
   }
 
-
+  
   
 }

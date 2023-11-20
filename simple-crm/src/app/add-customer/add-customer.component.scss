@@ -1,8 +1,41 @@
 body {
-    width: 100%;
-    height: 100%;
+   display: flex;
+   justify-content: center;
 }
 
 .dialog-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
+    height: 90vh;
+    gap: 20px;
 }
+
+.add-customer-container {
+    display: flex;
+    gap: 20px;
+    
+}
+
+.address-container {
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.contact-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    width: 50%;
+}
+

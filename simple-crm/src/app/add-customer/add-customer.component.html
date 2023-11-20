@@ -1,31 +1,64 @@
-
 <div class="dialog-container">
-<h1 mat-dialog-title>Add Customer </h1>
-<div mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <textarea [(ngModel)]="customer.name" matInput placeholder="Name">Name</textarea>
-  </mat-form-field>
-  <mat-form-field >
-    <mat-label>Company</mat-label>
-    <textarea [(ngModel)]="customer.company" matInput placeholder="Company">Company</textarea>
-  </mat-form-field>
+  <h1 mat-dialog-title>Add Customer </h1>
+  <div mat-dialog-content>
+    <div class="add-customer-container">
+    <div class="address-container">
+    <mat-form-field>
+      <mat-label>First name</mat-label>
+      <textarea [(ngModel)]="customer.firstname" matInput placeholder="First Name">First Name</textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <textarea [(ngModel)]="customer.lastname" matInput placeholder="Last Name">Last Name</textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Company</mat-label>
+      <textarea [(ngModel)]="customer.company" matInput placeholder="Company">Company</textarea>
+    </mat-form-field>
 
 
 
 
-  <mat-form-field class="example-full-width">
-    <mat-label>Address</mat-label>
-    <textarea  [(ngModel)]="customer.address" matInput placeholder="Ex. 100 Main St">1600 Amphitheatre Pkwy</textarea>
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>Zip code</mat-label>
-    <textarea [(ngModel)]="customer.zipcode" matInput></textarea>
-  </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Address</mat-label>
+      <textarea [(ngModel)]="customer.address" matInput placeholder="Ex. 100 Main St">1600 Amphitheatre Pkwy</textarea>
+    </mat-form-field>
 
+    <mat-form-field class="example-full-width">
+      <mat-label>Zip code</mat-label>
+      <textarea [(ngModel)]="customer.zipcode" matInput></textarea>
+    </mat-form-field>
+  </div>
+<div class="contact-info-container">
+    <mat-form-field>
+      <mat-label>E-Mail</mat-label>
+      <input [(ngModel)]="customer.email" matInput placeholder="pat@example.com" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+      <mat-label>Telephone</mat-label>
+      <span matPrefix>+1 &nbsp;</span>
+      <input  [(ngModel)]="customer.tel"type="tel" matInput placeholder="555-555-1234">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    
+  
+    <mat-form-field>
+      <mat-label>Birth date</mat-label>
+      <input [(ngModel)]="customer.birthdate" matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    
+  </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()" >Cancel</button>
-  <button (click)="saveCustomer()" mat-button>Save</button>
-</div>
+  </div>
+
+ 
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button (click)="saveCustomer()" mat-button>Save</button>
+  </div>
 </div>

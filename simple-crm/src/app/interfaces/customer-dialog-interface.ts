@@ -1,7 +1,10 @@
 export interface CustomerData {
-    name: string ;
+    firstname: string ;
+    lastname: string ;
     company: string;
     address: string;
     zipcode: string;
-
+    email: string;
+    tel: string;
+    birthdate: Date | null;
   }

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CustomerData } from './interfaces/customer-dialog-interface';
 import { inject } from '@angular/core';
-import { Firestore, collection, doc, collectionData, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, doc, collectionData, onSnapshot,addDoc } from '@angular/fire/firestore';
+import { Timestamp } from '@angular/fire/firestore';
 
 
 @Injectable({
@@ -41,7 +42,7 @@ export class FirebaseService {
     this.items$ = collectionData(this.getCustomersRef());
     this.items = this.items$.subscribe((list) => {
       list.forEach((element) => {
-        console.log(element);
+ 
       })
       this.items.unsubscribe();
     });
@@ -49,25 +50,38 @@ export class FirebaseService {
   }
 
   ngOnDestroy() {
-    // this.unsubList();
+    this.unsubList();
    
   }
 
   subCustomerList() {
    return onSnapshot(this.getCustomersRef(), (list) => {
+    this.customers = [];
       list.forEach(element => {
-        console.log(this.setCustomerData(element.data()));
+        this.customers.push(this.setCustomerData(element.data()));
       })
     })
   }
 
   setCustomerData(obj:any) {
     return {
-      name: obj.name || "",
+      firstname: obj.firstname || "",
+      lastname: obj.lastname || "", 
       company: obj.company || "",
       address: obj.address || "",
-      zipcode: obj.zipcode|| "",
+      zipcode: obj.zipcode || "",
+      email: obj.email || "",
+      tel: obj.tel || "",
+      birthdate: obj.birthdate ? this.timestampToDate(obj.birthdate) : null,
     }
+  }
+
+  async addCustomer(item: CustomerData) {
+    await addDoc(this.getCustomersRef(),item).catch(
+      (err) => {console.error}
+    ).then (
+      (docRef)=> {console.log("Document written with Id", docRef)}
+    )
   }
 
 
@@ -84,5 +98,9 @@ export class FirebaseService {
   */
   getSingleDocRef(colId: string, docId: string) {
     return doc(collection(this.firestore, colId), docId);
+  }
+
+timestampToDate(timestamp: Timestamp): Date {
+    return timestamp.toDate();
   }
 }
