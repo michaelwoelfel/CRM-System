@@ -1,6 +1,7 @@
-<mat-progress-bar mode="indeterminate" *ngIf="showprogressbar"></mat-progress-bar>
-<div class="placeholder-progressbar " *ngIf="!showprogressbar"></div>
+
 <div class="add-customer-container">
+    <mat-progress-bar mode="indeterminate" *ngIf="showprogressbar"></mat-progress-bar>
+<div class="placeholder-progressbar " *ngIf="!showprogressbar"></div>
     <button (click)="openDialog()" class="add-customer-button" mat-raised-button matTooltip="Add customer"
         aria-label="Button that displays a tooltip when focused or hovered over">
         <img class="add-customer-img" src="assets\img\plus-box.png">
@@ -63,6 +64,7 @@
         <ng-container  matColumnDef=delete>
             <th mat-header-cell *matHeaderCellDef></th>
             <td  mat-cell *matCellDef="let element">   
+               
                 <img matTooltip="Delete customer" (click)="deleteCustomer(element.id)" class="deleteimg"src="./assets\img\delete.png">
                 <img matTooltip="Edit customer" (click)="editCustomer(element.id)" class="deleteimg"src="./assets\img\edit.png">
            </td>
@@ -71,7 +73,7 @@
 
         
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr class="hoverCustomer"  mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr (click)="showUserDetail(row.id)" class="hoverCustomer"  mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"

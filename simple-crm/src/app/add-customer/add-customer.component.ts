@@ -48,6 +48,7 @@ export class AddCustomerComponent {
   updateCustomer() {
     this.firebaseService.updateCustomer(this.customer);
     this.onNoClick();
+    this.editMode = false;
   }
 
 

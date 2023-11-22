@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CustomerData } from '../interfaces/customer-dialog-interface';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ref } from '@angular/fire/database';
+import { Router } from '@angular/router';
 
 
 
@@ -26,7 +27,7 @@ export class CustomersComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['Firstname', 'Lastname','Company','Address','Zipcode','Email','tel','birthdate','delete',];
 
  
-  constructor(public dialog: MatDialog, public firebaseService: FirebaseService,) {
+  constructor(public router: Router,public dialog: MatDialog, public firebaseService: FirebaseService,) {
     this.ELEMENT_DATA  = this.firebaseService.customers;
     this.dataSource = new MatTableDataSource<CustomerData>(this.ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
@@ -95,6 +96,10 @@ export class CustomersComponent implements AfterViewInit, OnInit {
 
   getCustomerIndexFromId(id:string) {
     return this.firebaseService.customers.findIndex((customer) => customer.id === id);
+  }
+
+  showUserDetail(id:string) {
+    this.router.navigateByUrl('/customerdetail/' + id);
   }
 
  
