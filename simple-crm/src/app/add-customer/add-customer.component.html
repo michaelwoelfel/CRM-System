@@ -3,21 +3,18 @@
   <div mat-dialog-content>
     <div class="add-customer-container">
     <div class="address-container">
-    <mat-form-field>
+    <mat-form-field  class="example-full-width">
       <mat-label>First name</mat-label>
       <textarea [(ngModel)]="customer.firstname" matInput placeholder="First Name">First Name</textarea>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field  class="example-full-width">
       <mat-label>Last Name</mat-label>
       <textarea [(ngModel)]="customer.lastname" matInput placeholder="Last Name">Last Name</textarea>
-    </mat-form-field>
-    <mat-form-field>
+    </mat-form-field >
+    <mat-form-field class="example-full-width">
       <mat-label>Company</mat-label>
       <textarea [(ngModel)]="customer.company" matInput placeholder="Company">Company</textarea>
     </mat-form-field>
-
-
-
 
     <mat-form-field class="example-full-width">
       <mat-label>Address</mat-label>

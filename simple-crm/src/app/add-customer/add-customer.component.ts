@@ -24,18 +24,24 @@ export class AddCustomerComponent {
     email: "",
     tel: "",
     birthdate: null,
+    id: "",
   };
   constructor(public a11: A11yModule, public dialogRef: MatDialogRef<AddCustomerComponent>, public firebaseService: FirebaseService) { }
 
   async saveCustomer() {
     console.log("currentUser is", this.customer);
-    await this.firebaseService.addCustomer(this.customer);
+    this.firebaseService.addCustomer(this.customer);
     this.onNoClick();
+  
   }
 
 
+
+ 
+
   onNoClick(): void {
     this.dialogRef.close();
+   
   }
 
   getErrorMessage() {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CustomerData } from './interfaces/customer-dialog-interface';
 import { inject } from '@angular/core';
-import { Firestore, collection, doc, collectionData, onSnapshot,addDoc } from '@angular/fire/firestore';
+import { Firestore, collection, doc, collectionData, onSnapshot,addDoc,deleteDoc} from '@angular/fire/firestore';
 import { Timestamp } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -28,37 +28,7 @@ export class FirebaseService {
 
   customerDummyData: CustomerData[] = 
     [
-      {
-        "firstname": "Kathleen",
-        "lastname": "Todd",
-        "company": "Davis-Sullivan",
-        "address": "9158 Lauren Station Apt. 503, South Jacob, WI 34475",
-        "zipcode": "92719",
-        "email": "candice62@yahoo.com",
-        "tel": "+11138764771",
-        "birthdate": "2002-04-20"
-      },
-      {
-        "firstname": "David",
-        "lastname": "Woodard",
-        "company": "Hall, Sweeney and Rodriguez",
-        "address": "USNS Gibson, FPO AE 98098",
-        "zipcode": "22682",
-        "email": "xcampbell@smith.com",
-        "tel": "+11624411522",
-        "birthdate": "2003-05-24"
-      },
-      {
-        "firstname": "Andrew",
-        "lastname": "Jackson",
-        "company": "Williams, Lucas and Case",
-        "address": "87367 Howard Harbor, Port Susanshire, NJ 55982",
-        "zipcode": "23871",
-        "email": "anthony78@wilson-stewart.info",
-        "tel": "+16169502450",
-        "birthdate": "1998-05-29"
-      }
-    
+   
     
     
   ]
@@ -66,7 +36,7 @@ export class FirebaseService {
   unsubList;
   unsubSingle;
   ngOnInit() {
-
+   
   }
 
   constructor() {
@@ -99,16 +69,8 @@ export class FirebaseService {
 }
 
 
-  subCustomerList() {
-   return onSnapshot(this.getCustomersRef(), (list) => {
-    this.customers = [];
-      list.forEach(element => {
-        this.customers.push(this.setCustomerData(element.data()));
-      })
-    })
-  }
 
-  setCustomerData(obj:any) {
+  setCustomerData(obj:any,customerid:string) {
      // Check if 'birthdate' is a Timestamp and convert to Date object
   let birthdate: Date | null = null;
   if (obj.birthdate) {
@@ -128,16 +90,40 @@ export class FirebaseService {
       email: obj.email || "",
       tel: obj.tel || "",
       birthdate: birthdate,
-    }
+      id: customerid || "",
   }
 
+}
+
   async addCustomer(item: CustomerData) {
+    console.log("New Customer Added");
     await addDoc(this.getCustomersRef(),item).catch(
       (err) => {console.error}
     ).then (
-      (docRef)=> {console.log("Document written with Id", docRef)}
+      (docRef)=> {console.log("Document written with Id", docRef?.id)}
     )
   }
+
+
+  subCustomerList() {
+    return onSnapshot(this.getCustomersRef(), (list) => {
+     this.customers = [];
+       list.forEach(element => {
+         this.customers.push(this.setCustomerData(element.data(),element.id));
+         console.log("subCustomerList is triggered");
+       })
+     })
+   }
+
+
+ 
+    async deleteCustomer(colId: "customers", docId: string) {
+    await  deleteDoc(this.getSingleDocRef(colId, docId)).catch (
+
+      (err) => {console.log(err);}
+    )
+
+   }
 
 
 
