@@ -30,9 +30,6 @@ export class CustomersComponent implements AfterViewInit, OnInit {
     this.ELEMENT_DATA  = this.firebaseService.customers;
     this.dataSource = new MatTableDataSource<CustomerData>(this.ELEMENT_DATA);
     this.dataSource.paginator = this.paginator;
-  
-
-
   }
 
   
@@ -64,6 +61,21 @@ export class CustomersComponent implements AfterViewInit, OnInit {
     this.showProgressbarForTwoSeconds();
   }
 
+
+  editCustomer(id:string) {
+    let customerIndex =  this.getCustomerIndexFromId(id)
+    this.openEditDialog(this.firebaseService.customers[customerIndex]);
+  
+
+  }
+
+
+  openEditDialog(customer:CustomerData) {
+    const dialogRef =this.dialog.open(AddCustomerComponent, {
+      data: customer
+    });
+  }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -79,6 +91,10 @@ export class CustomersComponent implements AfterViewInit, OnInit {
     setTimeout(() => {
       this.showprogressbar = false;
     }, 1000);
+  }
+
+  getCustomerIndexFromId(id:string) {
+    return this.firebaseService.customers.findIndex((customer) => customer.id === id);
   }
 
  

@@ -4,6 +4,7 @@ import { CustomerData } from '../interfaces/customer-dialog-interface';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FirebaseService } from '../firebase.service';
 import { FormControl, Validators, } from '@angular/forms';
+import { Inject } from '@angular/core';
 
 
 
@@ -15,6 +16,9 @@ import { FormControl, Validators, } from '@angular/forms';
 })
 export class AddCustomerComponent {
   email = new FormControl('', [Validators.required, Validators.email]);
+  editMode = false;
+ 
+
   customer: CustomerData = {
     firstname: "",
     lastname: "",
@@ -26,15 +30,25 @@ export class AddCustomerComponent {
     birthdate: null,
     id: "",
   };
-  constructor(public a11: A11yModule, public dialogRef: MatDialogRef<AddCustomerComponent>, public firebaseService: FirebaseService) { }
+  constructor( @Inject(MAT_DIALOG_DATA) public data: CustomerData ,public a11: A11yModule, public dialogRef: MatDialogRef<AddCustomerComponent>, public firebaseService: FirebaseService,  ) {
+
+    if (data) {
+      this.customer = data;
+      this.editMode = true;
+    }
+   }
 
   async saveCustomer() {
     console.log("currentUser is", this.customer);
     this.firebaseService.addCustomer(this.customer);
     this.onNoClick();
-  
   }
 
+
+  updateCustomer() {
+    this.firebaseService.updateCustomer(this.customer);
+    this.onNoClick();
+  }
 
 
  

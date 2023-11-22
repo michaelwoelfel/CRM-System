@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CustomerData } from './interfaces/customer-dialog-interface';
 import { inject } from '@angular/core';
-import { Firestore, collection, doc, collectionData, onSnapshot,addDoc,deleteDoc} from '@angular/fire/firestore';
+import { Firestore, collection, doc, collectionData, onSnapshot,addDoc,deleteDoc,updateDoc} from '@angular/fire/firestore';
 import { Timestamp } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -124,6 +124,53 @@ export class FirebaseService {
     )
 
    }
+
+
+   async updateCustomer(customer: CustomerData) {
+    if (customer.id) {
+      let docRef = this.getSingleDocRef('customers',customer.id);
+      await updateDoc(docRef, this.getUpdateData(customer)).catch(
+       
+        (error) => { console.log(error); }
+        
+      );
+     
+    }
+    console.log("Customer wurde geupdated mit ",customer);
+  }
+
+  getUpdateData(customer:CustomerData) {
+    return {
+      firstname: customer.firstname || "",
+      lastname: customer.lastname || "", 
+      company: customer.company || "",
+      address: customer.address || "",
+      zipcode: customer.zipcode || "",
+      email: customer.email || "",
+      tel: customer.tel || "",
+      birthdate: customer.birthdate,
+  }
+
+}
+  
+  
+  
+  // getCleanJson(note: Note) {
+  //    return {
+  //     type: note.type,
+  //     titel: note.titel,
+  //     content: note.content,
+  //     marked: note.marked,
+  //    }
+  // }
+  // getColIdFromNote(customer: CustomerData) {
+  //   if (note.type == 'note') {
+  //     return 'Notes'
+  //   } else {
+  //     return 'Trash'
+  //   }
+  // }
+  
 
 
 

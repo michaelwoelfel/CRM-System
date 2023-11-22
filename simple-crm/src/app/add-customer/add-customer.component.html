@@ -1,5 +1,6 @@
 <div class="dialog-container">
-  <h1 mat-dialog-title>Add Customer </h1>
+  <h1 *ngIf="!editMode"  mat-dialog-title>Add Customer </h1>
+  <h1 *ngIf="editMode" mat-dialog-title>Edit Customer </h1>
   <div mat-dialog-content>
     <div class="add-customer-container">
     <div class="address-container">
@@ -55,7 +56,8 @@
 
  
   <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button (click)="saveCustomer()" mat-button>Save</button>
+    <button  mat-button (click)="onNoClick()">Cancel</button>
+    <button *ngIf="editMode == false"(click)="saveCustomer()" mat-button>Save</button>
+    <button *ngIf="editMode == true"(click)="updateCustomer()" mat-button>Save</button>
   </div>
 </div>
